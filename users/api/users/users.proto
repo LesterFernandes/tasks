@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package users;
+
+// Use your real module path here (e.g. github.com/you/yourrepo/users/pb)
+option go_package = "github.com/LesterFernandes/tasks/users/pb;pb";
+
+service UsersService {
+  // Creates a new user
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+}
+
+message CreateUserRequest {
+  string email = 1;
+  string username = 2;
+  string name = 3;
+}
+
+message CreateUserResponse {
+  int32 status = 1; // use int32 for status codes (like HTTP codes)
+  string error = 2; // empty if no error
+  string id = 3; // UUID (string is correct here)
+}
