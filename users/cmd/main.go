@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"net"
-	"os"
 
 	db "github.com/LesterFernandes/tasks/users/db/gen"
 	"github.com/LesterFernandes/tasks/users/internal/services"
@@ -17,7 +16,7 @@ import (
 func main() {
 	ctx := context.Background()
 	// Setup database connection pool
-	pool, err := pgxpool.New(ctx, os.Getenv("postgres://postgres:admin@localhost:5432/tasks"))
+	pool, err := pgxpool.New(ctx, "postgres://postgres:admin@localhost:5432/tasks")
 	if err != nil {
 		log.Error().Err(err).Msg("Error db init")
 	}

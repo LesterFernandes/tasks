@@ -1,5 +1,5 @@
-github.com/LesterFernandes/tasks/users v0.0.0-20250822092956-7a2d0848247f h1:gH9dw5UU8YHxuYTjTcu2cXkVlEbdYrGWq3J/7BBSrZ4=
-github.com/LesterFernandes/tasks/users v0.0.0-20250822092956-7a2d0848247f/go.mod h1:5lsg9m43qWrGcIvRGYP2u+NBSdLhp+FK0YLSuhfOPBA=
+github.com/LesterFernandes/tasks/users v0.0.0-20250822113912-c7f04666754a h1:FVDdpUVB93tqfbSTe5Ssg6l6Mjkz2x33JcOMORip8Ug=
+github.com/LesterFernandes/tasks/users v0.0.0-20250822113912-c7f04666754a/go.mod h1:5lsg9m43qWrGcIvRGYP2u+NBSdLhp+FK0YLSuhfOPBA=
 github.com/coreos/go-systemd/v22 v22.5.0/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSVTIJ3seZv2GcEnc=
 github.com/go-logr/logr v1.4.3 h1:CjnDlHq8ikf6E492q6eKboGOC0T8CDaOvkHCIg8idEI=
 github.com/go-logr/logr v1.4.3/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=

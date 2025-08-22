@@ -1,6 +1,8 @@
 package clients
 
 import (
+	"context"
+
 	"github.com/LesterFernandes/tasks/users/pb"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
@@ -12,7 +14,7 @@ type UsersServiceClient struct {
 }
 
 func InitUsersServiceClient(url string) (*UsersServiceClient, error) {
-	cc, err := grpc.NewClient(
+	gc, err := grpc.NewClient(
 		url,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
@@ -23,12 +25,17 @@ func InitUsersServiceClient(url string) (*UsersServiceClient, error) {
 	}
 
 	c := &UsersServiceClient{
-		Client: pb.NewUsersServiceClient(cc),
+		Client: pb.NewUsersServiceClient(gc),
 	}
 
 	return c, nil
 }
 
-// func (c *UsersServiceClient) GetUsers() (*pb.ListUsersResponse, error) {
-// 	c.Client.CreateUser()
-// }
+func (c *UsersServiceClient) GetUsers() (*pb.ListUsersResponse, error) {
+	users, err := c.Client.ListUsers(context.Background(), &pb.ListUsersRequest{})
+	if err != nil {
+		log.Error().Err(err)
+		return nil, err
+	}
+	return users, nil
+}

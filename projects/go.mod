@@ -3,12 +3,12 @@ module github.com/LesterFernandes/tasks/projects
 go 1.24.5
 
 require (
-	github.com/LesterFernandes/tasks/users v0.0.0-20250822092956-7a2d0848247f
 	github.com/rs/zerolog v1.34.0
 	google.golang.org/grpc v1.75.0
 )
 
 require (
+	github.com/LesterFernandes/tasks/users v0.0.0-20250822113912-c7f04666754a // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
 	golang.org/x/net v0.41.0 // indirect
