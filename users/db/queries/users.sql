@@ -3,3 +3,6 @@ insert into users (email, name, user_name, password_hash) values ($1, $2, $3, $4
 
 -- name: GetUser :one
 select * from users where user_id=$1;
+
+-- name: GetUsers :many
+select * from users;
