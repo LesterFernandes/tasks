@@ -32,4 +32,5 @@ go.work.sum
 # .vscode/
 #
 
-note
+note.txt
+tmp

@@ -6,17 +6,13 @@ import (
 	"os"
 
 	db "github.com/LesterFernandes/tasks/users/db/gen"
+	"github.com/LesterFernandes/tasks/users/internal/services"
 	"github.com/LesterFernandes/tasks/users/pb"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"google.golang.org/grpc"
 
 	"github.com/rs/zerolog/log"
 )
-
-type Server struct {
-	db *db.Queries
-	pb.UnimplementedUsersServiceServer
-}
 
 func main() {
 	ctx := context.Background()
@@ -28,10 +24,7 @@ func main() {
 	defer pool.Close()
 
 	dbConn := db.New(pool)
-
-	server := &Server{
-		db: dbConn,
-	}
+	service := services.NewService(dbConn)
 
 	lis, err := net.Listen("tcp", ":9001")
 	if err != nil {
@@ -39,7 +32,7 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	pb.RegisterUsersServiceServer(grpcServer, server)
+	pb.RegisterUsersServiceServer(grpcServer, service)
 
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Error().Err(err).Msg("grpc server conn error")
