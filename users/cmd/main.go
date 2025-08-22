@@ -4,9 +4,9 @@ import (
 	"context"
 	"net"
 
+	"github.com/LesterFernandes/tasks/shared-protos/pb"
 	db "github.com/LesterFernandes/tasks/users/db/gen"
 	"github.com/LesterFernandes/tasks/users/internal/services"
-	"github.com/LesterFernandes/tasks/users/pb"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"google.golang.org/grpc"
 

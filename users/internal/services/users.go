@@ -3,7 +3,7 @@ package services
 import (
 	"context"
 
-	"github.com/LesterFernandes/tasks/users/pb"
+	"github.com/LesterFernandes/tasks/shared-protos/pb"
 	"github.com/rs/zerolog/log"
 )
 

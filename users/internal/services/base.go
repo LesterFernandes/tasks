@@ -2,7 +2,7 @@ package services
 
 import (
 	db "github.com/LesterFernandes/tasks/users/db/gen"
-	"github.com/LesterFernandes/tasks/users/pb"
+	"github.com/LesterFernandes/tasks/shared-protos/pb"
 )
 
 type service struct {
