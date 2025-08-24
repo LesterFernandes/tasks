@@ -2,7 +2,6 @@ package clients
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/LesterFernandes/tasks/shared-protos/pb"
 	"github.com/rs/zerolog/log"
@@ -38,6 +37,5 @@ func (c *UsersServiceClient) GetUsers() (*pb.ListUsersResponse, error) {
 		log.Error().Err(err)
 		return nil, err
 	}
-	fmt.Println(users)
 	return users, nil
 }

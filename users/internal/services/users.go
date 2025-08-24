@@ -4,14 +4,14 @@ import (
 	"context"
 
 	"github.com/LesterFernandes/tasks/shared-protos/pb"
+	db "github.com/LesterFernandes/tasks/users/db/gen"
 	"github.com/rs/zerolog/log"
 )
 
 func (s *service) ListUsers(ctx context.Context, req *pb.ListUsersRequest) (*pb.ListUsersResponse, error) {
-
 	users, err := s.db.GetUsers(ctx)
 	if err != nil {
-		log.Error().Err(err).Msg("db error retrieving users")
+		log.Error().Err(err).Msg("DB error retrieving users")
 		return nil, err
 	}
 
@@ -31,4 +31,23 @@ func (s *service) ListUsers(ctx context.Context, req *pb.ListUsersRequest) (*pb.
 	}
 
 	return resp, nil
+}
+
+func (s *service) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error) {
+	resp, err := s.db.CreateUser(ctx, db.CreateUserParams{
+		PasswordHash: "_pw",
+		Email:        req.Email,
+		UserName:     req.UserName,
+		Name:         req.Name,
+	})
+
+	if err != nil {
+		log.Error().Err(err).Msg("Error creating user")
+		return nil, err
+	}
+
+	return &pb.CreateUserResponse{
+		Status: 200,
+		UserId: resp.UserID.String(),
+	}, nil
 }
