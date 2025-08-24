@@ -1,21 +1,8 @@
 # Golang-migrate Makefile
 
-PROTOC       = protoc
-PROTO_DIR    = api/users
-PB_DIR       = pb
-PROTO_FILES  = $(wildcard $(PROTO_DIR)/*.proto)
 DB_URL			 = postgres://postgres:admin@localhost:5432/tasks?sslmode=disable
 
-.PHONY: proto clean run migrate-new migrate-up generate-sqlc migrate-down migration-status force-version
-
-proto:
-	$(PROTOC) --proto_path=$(PROTO_DIR) \
-		--go_out=$(PB_DIR) --go_opt=paths=source_relative \
-		--go-grpc_out=$(PB_DIR) --go-grpc_opt=paths=source_relative \
-		$(PROTO_FILES)
-
-clean:
-	rm -f $(PB_DIR)/*.pb.go
+.PHONY: run migrate-new migrate-up generate-sqlc migrate-down migration-status force-version
 
 run:
 	go run ./cmd/server
