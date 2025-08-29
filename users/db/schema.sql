@@ -16,6 +16,16 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: user_role; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE public.user_role AS ENUM (
+    'owner',
+    'member'
+);
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -27,6 +37,31 @@ SET default_table_access_method = heap;
 CREATE TABLE public.schema_migrations (
     version bigint NOT NULL,
     dirty boolean NOT NULL
+);
+
+
+--
+-- Name: team_members; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.team_members (
+    user_id uuid,
+    team_id uuid,
+    role public.user_role DEFAULT 'member'::public.user_role NOT NULL
+);
+
+
+--
+-- Name: teams; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.teams (
+    team_id uuid DEFAULT gen_random_uuid() NOT NULL,
+    title character varying(255) NOT NULL,
+    descr text,
+    leader_id uuid,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -55,6 +90,22 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: teams teams_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.teams
+    ADD CONSTRAINT teams_pkey PRIMARY KEY (team_id);
+
+
+--
+-- Name: team_members user_team_unique; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.team_members
+    ADD CONSTRAINT user_team_unique UNIQUE (user_id, team_id);
+
+
+--
 -- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -68,6 +119,30 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
+
+
+--
+-- Name: team_members team_members_team_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.team_members
+    ADD CONSTRAINT team_members_team_id_fkey FOREIGN KEY (team_id) REFERENCES public.teams(team_id) ON DELETE CASCADE;
+
+
+--
+-- Name: team_members team_members_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.team_members
+    ADD CONSTRAINT team_members_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(user_id) ON DELETE CASCADE;
+
+
+--
+-- Name: teams teams_leader_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.teams
+    ADD CONSTRAINT teams_leader_id_fkey FOREIGN KEY (leader_id) REFERENCES public.users(user_id) ON DELETE SET NULL;
 
 
 --

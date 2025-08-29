@@ -8,6 +8,17 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+type service struct {
+	db *db.Queries
+	pb.UnimplementedUsersServiceServer
+}
+
+func NewService(dbConn *db.Queries) *service {
+	return &service{
+		db: dbConn,
+	}
+}
+
 func (s *service) ListUsers(ctx context.Context, req *pb.ListUsersRequest) (*pb.ListUsersResponse, error) {
 	users, err := s.db.GetUsers(ctx)
 	if err != nil {
@@ -51,3 +62,6 @@ func (s *service) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*p
 		UserId: resp.UserID.String(),
 	}, nil
 }
+
+// func (s *service) CreateTeam(ctx context.Context, req *pb.CreateTeamRequest) (*pb.CreateTeamResponse, error) {
+// }

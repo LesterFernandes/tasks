@@ -305,6 +305,238 @@ func (x *ListUsersResponse) GetUsers() []*UserResponse {
 	return nil
 }
 
+type CreateTeamRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        string                 `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	OwnerId       string                 `protobuf:"bytes,3,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
+	Descr         string                 `protobuf:"bytes,4,opt,name=descr,proto3" json:"descr,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateTeamRequest) Reset() {
+	*x = CreateTeamRequest{}
+	mi := &file_users_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateTeamRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTeamRequest) ProtoMessage() {}
+
+func (x *CreateTeamRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTeamRequest.ProtoReflect.Descriptor instead.
+func (*CreateTeamRequest) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateTeamRequest) GetTaskId() string {
+	if x != nil {
+		return x.TaskId
+	}
+	return ""
+}
+
+func (x *CreateTeamRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *CreateTeamRequest) GetOwnerId() string {
+	if x != nil {
+		return x.OwnerId
+	}
+	return ""
+}
+
+func (x *CreateTeamRequest) GetDescr() string {
+	if x != nil {
+		return x.Descr
+	}
+	return ""
+}
+
+type CreateTeamResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        int32                  `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	TaskId        string                 `protobuf:"bytes,3,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateTeamResponse) Reset() {
+	*x = CreateTeamResponse{}
+	mi := &file_users_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateTeamResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTeamResponse) ProtoMessage() {}
+
+func (x *CreateTeamResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTeamResponse.ProtoReflect.Descriptor instead.
+func (*CreateTeamResponse) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CreateTeamResponse) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *CreateTeamResponse) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
+}
+
+func (x *CreateTeamResponse) GetTaskId() string {
+	if x != nil {
+		return x.TaskId
+	}
+	return ""
+}
+
+type AddTeamMemberRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TaskId        string                 `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddTeamMemberRequest) Reset() {
+	*x = AddTeamMemberRequest{}
+	mi := &file_users_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddTeamMemberRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddTeamMemberRequest) ProtoMessage() {}
+
+func (x *AddTeamMemberRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddTeamMemberRequest.ProtoReflect.Descriptor instead.
+func (*AddTeamMemberRequest) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *AddTeamMemberRequest) GetTaskId() string {
+	if x != nil {
+		return x.TaskId
+	}
+	return ""
+}
+
+func (x *AddTeamMemberRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type AddTeamMemberResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        int32                  `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
+	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddTeamMemberResponse) Reset() {
+	*x = AddTeamMemberResponse{}
+	mi := &file_users_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddTeamMemberResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddTeamMemberResponse) ProtoMessage() {}
+
+func (x *AddTeamMemberResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_users_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddTeamMemberResponse.ProtoReflect.Descriptor instead.
+func (*AddTeamMemberResponse) Descriptor() ([]byte, []int) {
+	return file_users_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *AddTeamMemberResponse) GetStatus() int32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *AddTeamMemberResponse) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
+}
+
 var File_users_proto protoreflect.FileDescriptor
 
 const file_users_proto_rawDesc = "" +
@@ -327,11 +559,29 @@ const file_users_proto_rawDesc = "" +
 	"\x11ListUsersResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\x05R\x06status\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12)\n" +
-	"\x05users\x18\x03 \x03(\v2\x13.users.UserResponseR\x05users2\x91\x01\n" +
+	"\x05users\x18\x03 \x03(\v2\x13.users.UserResponseR\x05users\"s\n" +
+	"\x11CreateTeamRequest\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x19\n" +
+	"\bowner_id\x18\x03 \x01(\tR\aownerId\x12\x14\n" +
+	"\x05descr\x18\x04 \x01(\tR\x05descr\"[\n" +
+	"\x12CreateTeamResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\x05R\x06status\x12\x14\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error\x12\x17\n" +
+	"\atask_id\x18\x03 \x01(\tR\x06taskId\"H\n" +
+	"\x14AddTeamMemberRequest\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\"E\n" +
+	"\x15AddTeamMemberResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\x05R\x06status\x12\x14\n" +
+	"\x05error\x18\x02 \x01(\tR\x05error2\xa0\x02\n" +
 	"\fUsersService\x12A\n" +
 	"\n" +
 	"CreateUser\x12\x18.users.CreateUserRequest\x1a\x19.users.CreateUserResponse\x12>\n" +
-	"\tListUsers\x12\x17.users.ListUsersRequest\x1a\x18.users.ListUsersResponseB.Z,github.com/LesterFernandes/tasks/users/pb;pbb\x06proto3"
+	"\tListUsers\x12\x17.users.ListUsersRequest\x1a\x18.users.ListUsersResponse\x12A\n" +
+	"\n" +
+	"CreateTeam\x12\x18.users.CreateTeamRequest\x1a\x19.users.CreateTeamResponse\x12J\n" +
+	"\rAddTeamMember\x12\x1b.users.AddTeamMemberRequest\x1a\x1c.users.AddTeamMemberResponseB.Z,github.com/LesterFernandes/tasks/users/pb;pbb\x06proto3"
 
 var (
 	file_users_proto_rawDescOnce sync.Once
@@ -345,22 +595,30 @@ func file_users_proto_rawDescGZIP() []byte {
 	return file_users_proto_rawDescData
 }
 
-var file_users_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_users_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_users_proto_goTypes = []any{
-	(*CreateUserRequest)(nil),  // 0: users.CreateUserRequest
-	(*CreateUserResponse)(nil), // 1: users.CreateUserResponse
-	(*ListUsersRequest)(nil),   // 2: users.ListUsersRequest
-	(*UserResponse)(nil),       // 3: users.UserResponse
-	(*ListUsersResponse)(nil),  // 4: users.ListUsersResponse
+	(*CreateUserRequest)(nil),     // 0: users.CreateUserRequest
+	(*CreateUserResponse)(nil),    // 1: users.CreateUserResponse
+	(*ListUsersRequest)(nil),      // 2: users.ListUsersRequest
+	(*UserResponse)(nil),          // 3: users.UserResponse
+	(*ListUsersResponse)(nil),     // 4: users.ListUsersResponse
+	(*CreateTeamRequest)(nil),     // 5: users.CreateTeamRequest
+	(*CreateTeamResponse)(nil),    // 6: users.CreateTeamResponse
+	(*AddTeamMemberRequest)(nil),  // 7: users.AddTeamMemberRequest
+	(*AddTeamMemberResponse)(nil), // 8: users.AddTeamMemberResponse
 }
 var file_users_proto_depIdxs = []int32{
 	3, // 0: users.ListUsersResponse.users:type_name -> users.UserResponse
 	0, // 1: users.UsersService.CreateUser:input_type -> users.CreateUserRequest
 	2, // 2: users.UsersService.ListUsers:input_type -> users.ListUsersRequest
-	1, // 3: users.UsersService.CreateUser:output_type -> users.CreateUserResponse
-	4, // 4: users.UsersService.ListUsers:output_type -> users.ListUsersResponse
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
+	5, // 3: users.UsersService.CreateTeam:input_type -> users.CreateTeamRequest
+	7, // 4: users.UsersService.AddTeamMember:input_type -> users.AddTeamMemberRequest
+	1, // 5: users.UsersService.CreateUser:output_type -> users.CreateUserResponse
+	4, // 6: users.UsersService.ListUsers:output_type -> users.ListUsersResponse
+	6, // 7: users.UsersService.CreateTeam:output_type -> users.CreateTeamResponse
+	8, // 8: users.UsersService.AddTeamMember:output_type -> users.AddTeamMemberResponse
+	5, // [5:9] is the sub-list for method output_type
+	1, // [1:5] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -377,7 +635,7 @@ func file_users_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_users_proto_rawDesc), len(file_users_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

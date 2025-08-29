@@ -9,7 +9,66 @@ import (
 	"context"
 
 	"github.com/google/uuid"
+	"github.com/jackc/pgx/v5/pgtype"
 )
+
+const addTeamLeader = `-- name: AddTeamLeader :exec
+update teams set leader_id=$2 where teams.team_id=$1
+`
+
+type AddTeamLeaderParams struct {
+	TeamID   uuid.UUID  `json:"team_id"`
+	LeaderID *uuid.UUID `json:"leader_id"`
+}
+
+func (q *Queries) AddTeamLeader(ctx context.Context, arg AddTeamLeaderParams) error {
+	_, err := q.db.Exec(ctx, addTeamLeader, arg.TeamID, arg.LeaderID)
+	return err
+}
+
+const addTeamMember = `-- name: AddTeamMember :exec
+insert into team_members(team_id, user_id) values ($1, $2)
+`
+
+type AddTeamMemberParams struct {
+	TeamID *uuid.UUID `json:"team_id"`
+	UserID *uuid.UUID `json:"user_id"`
+}
+
+func (q *Queries) AddTeamMember(ctx context.Context, arg AddTeamMemberParams) error {
+	_, err := q.db.Exec(ctx, addTeamMember, arg.TeamID, arg.UserID)
+	return err
+}
+
+const createTeam = `-- name: CreateTeam :one
+insert into teams(team_id, title, leader_id, descr) values ($1, $2, $3, $4) returning team_id, title, descr, leader_id, created_at, updated_at
+`
+
+type CreateTeamParams struct {
+	TeamID   uuid.UUID   `json:"team_id"`
+	Title    string      `json:"title"`
+	LeaderID *uuid.UUID  `json:"leader_id"`
+	Descr    pgtype.Text `json:"descr"`
+}
+
+func (q *Queries) CreateTeam(ctx context.Context, arg CreateTeamParams) (Team, error) {
+	row := q.db.QueryRow(ctx, createTeam,
+		arg.TeamID,
+		arg.Title,
+		arg.LeaderID,
+		arg.Descr,
+	)
+	var i Team
+	err := row.Scan(
+		&i.TeamID,
+		&i.Title,
+		&i.Descr,
+		&i.LeaderID,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
 
 const createUser = `-- name: CreateUser :one
 insert into users (email, name, user_name, password_hash) values ($1, $2, $3, $4) returning user_id, email, password_hash, user_name, name, is_active, created_at, updated_at

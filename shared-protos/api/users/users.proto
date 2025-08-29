@@ -9,6 +9,8 @@ service UsersService {
   // Creates a new user
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc CreateTeam(CreateTeamRequest) returns (CreateTeamResponse);
+  rpc AddTeamMember(AddTeamMemberRequest) returns (AddTeamMemberResponse);
 }
 
 message CreateUserRequest {
@@ -36,4 +38,27 @@ message ListUsersResponse {
   int32 status = 1;
   string error = 2;
   repeated UserResponse users = 3;
+}
+
+message CreateTeamRequest {
+  string task_id = 1;
+  string title = 2;
+  string owner_id = 3;
+  string descr = 4;
+}
+
+message CreateTeamResponse {
+  int32 status = 1;
+  string error = 2;
+  string task_id = 3;
+}
+
+message AddTeamMemberRequest {
+  string task_id = 1;
+  string user_id = 2;
+}
+
+message AddTeamMemberResponse {
+  int32 status = 1;
+  string error = 2;
 }

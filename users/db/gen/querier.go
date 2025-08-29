@@ -11,6 +11,9 @@ import (
 )
 
 type Querier interface {
+	AddTeamLeader(ctx context.Context, arg AddTeamLeaderParams) error
+	AddTeamMember(ctx context.Context, arg AddTeamMemberParams) error
+	CreateTeam(ctx context.Context, arg CreateTeamParams) (Team, error)
 	CreateUser(ctx context.Context, arg CreateUserParams) (User, error)
 	GetUser(ctx context.Context, userID uuid.UUID) (User, error)
 	GetUsers(ctx context.Context) ([]User, error)

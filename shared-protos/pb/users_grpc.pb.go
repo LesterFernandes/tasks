@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UsersService_CreateUser_FullMethodName = "/users.UsersService/CreateUser"
-	UsersService_ListUsers_FullMethodName  = "/users.UsersService/ListUsers"
+	UsersService_CreateUser_FullMethodName    = "/users.UsersService/CreateUser"
+	UsersService_ListUsers_FullMethodName     = "/users.UsersService/ListUsers"
+	UsersService_CreateTeam_FullMethodName    = "/users.UsersService/CreateTeam"
+	UsersService_AddTeamMember_FullMethodName = "/users.UsersService/AddTeamMember"
 )
 
 // UsersServiceClient is the client API for UsersService service.
@@ -30,6 +32,8 @@ type UsersServiceClient interface {
 	// Creates a new user
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	CreateTeam(ctx context.Context, in *CreateTeamRequest, opts ...grpc.CallOption) (*CreateTeamResponse, error)
+	AddTeamMember(ctx context.Context, in *AddTeamMemberRequest, opts ...grpc.CallOption) (*AddTeamMemberResponse, error)
 }
 
 type usersServiceClient struct {
@@ -60,6 +64,26 @@ func (c *usersServiceClient) ListUsers(ctx context.Context, in *ListUsersRequest
 	return out, nil
 }
 
+func (c *usersServiceClient) CreateTeam(ctx context.Context, in *CreateTeamRequest, opts ...grpc.CallOption) (*CreateTeamResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTeamResponse)
+	err := c.cc.Invoke(ctx, UsersService_CreateTeam_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersServiceClient) AddTeamMember(ctx context.Context, in *AddTeamMemberRequest, opts ...grpc.CallOption) (*AddTeamMemberResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddTeamMemberResponse)
+	err := c.cc.Invoke(ctx, UsersService_AddTeamMember_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UsersServiceServer is the server API for UsersService service.
 // All implementations must embed UnimplementedUsersServiceServer
 // for forward compatibility.
@@ -67,6 +91,8 @@ type UsersServiceServer interface {
 	// Creates a new user
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	CreateTeam(context.Context, *CreateTeamRequest) (*CreateTeamResponse, error)
+	AddTeamMember(context.Context, *AddTeamMemberRequest) (*AddTeamMemberResponse, error)
 	mustEmbedUnimplementedUsersServiceServer()
 }
 
@@ -82,6 +108,12 @@ func (UnimplementedUsersServiceServer) CreateUser(context.Context, *CreateUserRe
 }
 func (UnimplementedUsersServiceServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
+}
+func (UnimplementedUsersServiceServer) CreateTeam(context.Context, *CreateTeamRequest) (*CreateTeamResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTeam not implemented")
+}
+func (UnimplementedUsersServiceServer) AddTeamMember(context.Context, *AddTeamMemberRequest) (*AddTeamMemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddTeamMember not implemented")
 }
 func (UnimplementedUsersServiceServer) mustEmbedUnimplementedUsersServiceServer() {}
 func (UnimplementedUsersServiceServer) testEmbeddedByValue()                      {}
@@ -140,6 +172,42 @@ func _UsersService_ListUsers_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UsersService_CreateTeam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTeamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServiceServer).CreateTeam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsersService_CreateTeam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServiceServer).CreateTeam(ctx, req.(*CreateTeamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UsersService_AddTeamMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTeamMemberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServiceServer).AddTeamMember(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsersService_AddTeamMember_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServiceServer).AddTeamMember(ctx, req.(*AddTeamMemberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UsersService_ServiceDesc is the grpc.ServiceDesc for UsersService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -154,6 +222,14 @@ var UsersService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListUsers",
 			Handler:    _UsersService_ListUsers_Handler,
+		},
+		{
+			MethodName: "CreateTeam",
+			Handler:    _UsersService_CreateTeam_Handler,
+		},
+		{
+			MethodName: "AddTeamMember",
+			Handler:    _UsersService_AddTeamMember_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
