@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/LesterFernandes/tasks/api-gateway/internal/clients"
-	"github.com/LesterFernandes/tasks/api-gateway/internal/utils"
+	"github.com/LesterFernandes/tasks/utils"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )

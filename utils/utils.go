@@ -1,12 +1,26 @@
 package utils
 
 import (
+	"github.com/jackc/pgx/v5/pgtype"
+
 	"encoding/json"
 	"io"
 	"net/http"
 
 	"github.com/rs/zerolog/log"
 )
+
+func StringToPgText(s string) pgtype.Text {
+	if s == "" {
+		return pgtype.Text{
+			Valid: false,
+		}
+	}
+	return pgtype.Text{
+		String: s,
+		Valid:  true,
+	}
+}
 
 func Resp(w http.ResponseWriter, statusCode int, data any) {
 	w.Header().Add("Content-Type", "application/json")
@@ -15,7 +29,6 @@ func Resp(w http.ResponseWriter, statusCode int, data any) {
 }
 
 func ReadBody[T any](r *http.Request) (*T, error) {
-
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		log.Error().Err(err).Msg("Error reading request body")

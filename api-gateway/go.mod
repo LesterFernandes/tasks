@@ -10,6 +10,8 @@ require (
 )
 
 require (
+	github.com/LesterFernandes/tasks/utils v0.0.0-00010101000000-000000000000 // indirect
+	github.com/jackc/pgx/v5 v5.7.5 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
 	golang.org/x/net v0.41.0 // indirect
@@ -18,3 +20,5 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250707201910-8d1bb00bc6a7 // indirect
 	google.golang.org/protobuf v1.36.8 // indirect
 )
+
+replace github.com/LesterFernandes/tasks/utils => ../utils

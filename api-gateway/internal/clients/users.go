@@ -3,8 +3,8 @@ package clients
 import (
 	"net/http"
 
-	"github.com/LesterFernandes/tasks/api-gateway/internal/utils"
 	pb "github.com/LesterFernandes/tasks/shared-protos/pb"
+	"github.com/LesterFernandes/tasks/utils"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
