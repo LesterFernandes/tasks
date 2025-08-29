@@ -307,10 +307,9 @@ func (x *ListUsersResponse) GetUsers() []*UserResponse {
 
 type CreateTeamRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TaskId        string                 `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	Title         string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	OwnerId       string                 `protobuf:"bytes,3,opt,name=owner_id,json=ownerId,proto3" json:"owner_id,omitempty"`
 	Descr         string                 `protobuf:"bytes,4,opt,name=descr,proto3" json:"descr,omitempty"`
+	LeaderId      string                 `protobuf:"bytes,5,opt,name=leader_id,json=leaderId,proto3" json:"leader_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -345,23 +344,9 @@ func (*CreateTeamRequest) Descriptor() ([]byte, []int) {
 	return file_users_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *CreateTeamRequest) GetTaskId() string {
-	if x != nil {
-		return x.TaskId
-	}
-	return ""
-}
-
 func (x *CreateTeamRequest) GetTitle() string {
 	if x != nil {
 		return x.Title
-	}
-	return ""
-}
-
-func (x *CreateTeamRequest) GetOwnerId() string {
-	if x != nil {
-		return x.OwnerId
 	}
 	return ""
 }
@@ -373,11 +358,18 @@ func (x *CreateTeamRequest) GetDescr() string {
 	return ""
 }
 
+func (x *CreateTeamRequest) GetLeaderId() string {
+	if x != nil {
+		return x.LeaderId
+	}
+	return ""
+}
+
 type CreateTeamResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        int32                  `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
 	Error         string                 `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
-	TaskId        string                 `protobuf:"bytes,3,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	TeamId        string                 `protobuf:"bytes,3,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -426,16 +418,16 @@ func (x *CreateTeamResponse) GetError() string {
 	return ""
 }
 
-func (x *CreateTeamResponse) GetTaskId() string {
+func (x *CreateTeamResponse) GetTeamId() string {
 	if x != nil {
-		return x.TaskId
+		return x.TeamId
 	}
 	return ""
 }
 
 type AddTeamMemberRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	TaskId        string                 `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
+	TeamId        string                 `protobuf:"bytes,1,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -471,9 +463,9 @@ func (*AddTeamMemberRequest) Descriptor() ([]byte, []int) {
 	return file_users_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *AddTeamMemberRequest) GetTaskId() string {
+func (x *AddTeamMemberRequest) GetTeamId() string {
 	if x != nil {
-		return x.TaskId
+		return x.TeamId
 	}
 	return ""
 }
@@ -559,18 +551,17 @@ const file_users_proto_rawDesc = "" +
 	"\x11ListUsersResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\x05R\x06status\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12)\n" +
-	"\x05users\x18\x03 \x03(\v2\x13.users.UserResponseR\x05users\"s\n" +
-	"\x11CreateTeamRequest\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x12\x19\n" +
-	"\bowner_id\x18\x03 \x01(\tR\aownerId\x12\x14\n" +
-	"\x05descr\x18\x04 \x01(\tR\x05descr\"[\n" +
+	"\x05users\x18\x03 \x03(\v2\x13.users.UserResponseR\x05users\"\\\n" +
+	"\x11CreateTeamRequest\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x14\n" +
+	"\x05descr\x18\x04 \x01(\tR\x05descr\x12\x1b\n" +
+	"\tleader_id\x18\x05 \x01(\tR\bleaderId\"[\n" +
 	"\x12CreateTeamResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\x05R\x06status\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\x12\x17\n" +
-	"\atask_id\x18\x03 \x01(\tR\x06taskId\"H\n" +
+	"\ateam_id\x18\x03 \x01(\tR\x06teamId\"H\n" +
 	"\x14AddTeamMemberRequest\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x17\n" +
+	"\ateam_id\x18\x01 \x01(\tR\x06teamId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\"E\n" +
 	"\x15AddTeamMemberResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\x05R\x06status\x12\x14\n" +

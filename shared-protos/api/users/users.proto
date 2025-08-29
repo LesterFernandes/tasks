@@ -41,20 +41,19 @@ message ListUsersResponse {
 }
 
 message CreateTeamRequest {
-  string task_id = 1;
   string title = 2;
-  string owner_id = 3;
   string descr = 4;
+  string leader_id = 5;
 }
 
 message CreateTeamResponse {
   int32 status = 1;
   string error = 2;
-  string task_id = 3;
+  string team_id = 3;
 }
 
 message AddTeamMemberRequest {
-  string task_id = 1;
+  string team_id = 1;
   string user_id = 2;
 }
 
